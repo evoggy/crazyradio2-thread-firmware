@@ -9,3 +9,4 @@
 /nrfxlib/
 /zephyr/
 /modules/
+__pycache__/
