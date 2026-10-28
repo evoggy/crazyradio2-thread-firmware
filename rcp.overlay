@@ -1,0 +1,13 @@
+/* Crazyradio 2.0 additions to the nRF Connect SDK OpenThread coprocessor sample */
+
+&zephyr_udc0 {
+	cdc_acm_uart: cdc_acm_uart {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+};
+
+/ {
+	chosen {
+		zephyr,ot-uart = &cdc_acm_uart;
+	};
+};

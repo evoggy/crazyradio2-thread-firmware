@@ -1,0 +1,4 @@
+name: crazyradio2-thread
+build:
+  cmake: .
+  kconfig: Kconfig

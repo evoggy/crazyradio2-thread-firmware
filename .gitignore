@@ -1,0 +1,11 @@
+/build/
+.vscode/
+.west/
+.venv
+.cache/
+
+# West workspace (nRF Connect SDK and its modules)
+/nrf/
+/nrfxlib/
+/zephyr/
+/modules/

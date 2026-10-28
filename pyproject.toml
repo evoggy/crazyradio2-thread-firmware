@@ -1,0 +1,14 @@
+[project]
+name = "crazyradio2-thread-firmware"
+version = "0.1.0"
+description = "Crazyradio 2.0 OpenThread radio co-processor (RCP) firmware"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "rust-just",
+    "west",
+    "cmake",
+    "ninja",
+    "pyelftools>=0.32",
+    "pyserial",
+]

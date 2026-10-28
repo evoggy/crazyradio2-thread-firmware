@@ -1,0 +1,25 @@
+manifest:
+  self:
+    path: crazyradio2-thread-firmware
+
+  remotes:
+    - name: ncs
+      url-base: https://github.com/nrfconnect
+
+  projects:
+    - name: nrf
+      repo-path: sdk-nrf
+      remote: ncs
+      revision: v3.4.1
+      import:
+        name-allowlist:
+          - zephyr
+          - nrfxlib
+          - openthread
+          - mbedtls
+          - oberon-psa-crypto
+          - cmsis
+          - cmsis_6
+          - hal_nordic
+          - segger
+          - zcbor

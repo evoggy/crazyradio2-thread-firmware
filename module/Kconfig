@@ -1,0 +1,14 @@
+# Copyright (c) 2026 Bitcraze AB
+#
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+
+config CRAZYRADIO2_UF2_BOOTLOADER_RESET
+	bool "Reset to the UF2 bootloader when the host asks for bootloader mode"
+	depends on BOARD_CRAZYRADIO2 && OPENTHREAD
+	default y
+	select OPENTHREAD_PLATFORM_BOOTLOADER_MODE
+	select REBOOT
+	help
+	  Handle the OpenThread reset to bootloader request (Spinel reset type
+	  bootloader, "reset bootloader" in the OpenThread CLI) by restarting
+	  into the Crazyradio 2.0 UF2 bootloader.
