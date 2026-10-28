@@ -14,6 +14,13 @@ built for the Crazyradio 2.0. This repository adds:
 - `rcp.conf` and `rcp.overlay`: Spinel over USB CDC ACM to the host
 - `module/`: restarts into the UF2 bootloader when the host asks for bootloader mode
 
+The radio shows up on USB as `35F0:B001` (Bitcraze AB, Crazyradio 2.0 Thread), a USB CDC ACM serial port.
+
+## Status
+
+Tested with two Crazyradio 2.0 and the OpenThread POSIX host (`ot-cli`): forming a network, joining it and pinging
+in both directions without lost or retried frames. Not yet tested with Home Assistant.
+
 ## Building
 
 The first time, enter the Python venv and fetch the nRF Connect SDK, Zephyr SDK and Python dependencies:
@@ -33,6 +40,9 @@ The firmware is written to `build/coprocessor/zephyr/zephyr.uf2`.
 
 ## Flashing
 
+The firmware works with the factory bootloader of the Crazyradio 2.0, nothing else needs to be updated. It goes in the
+same place as the Crazyradio firmware, so the two can be swapped back and forth.
+
 Hold the button on the Crazyradio 2.0 while plugging it in. A USB drive named `Crazyradio2` appears; copy
 `zephyr.uf2` to it. To go back to the Crazyradio firmware, do the same with its UF2 file.
 
@@ -42,8 +52,8 @@ A Crazyradio already running this firmware can be put in bootloader mode without
 just bootloader
 ```
 
-This sends the OpenThread reset to bootloader request (Spinel reset type bootloader), so stop the border router
-first, it holds the serial port.
+This finds the first radio with USB ID `35F0:B001`, or takes a serial port as argument, and sends it the OpenThread
+reset to bootloader request (Spinel reset type bootloader). Stop the border router first, it holds the serial port.
 
 With a debug probe connected, `just flash` flashes with probe-rs instead.
 

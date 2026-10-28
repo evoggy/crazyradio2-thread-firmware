@@ -11,6 +11,9 @@ import struct
 import serial
 from serial.tools import list_ports
 
+USB_VID = 0x35F0
+USB_PID = 0xB001
+
 SPINEL_HEADER = 0x81  # Command flag, interface 0, transaction 1
 SPINEL_CMD_RESET = 1
 SPINEL_RESET_BOOTLOADER = 3
@@ -39,7 +42,7 @@ def hdlc_frame(payload):
 
 def find_radio():
     for port in list_ports.comports():
-        if port.manufacturer == "Bitcraze AB" and port.product == "Crazyradio 2.0 Thread":
+        if port.vid == USB_VID and port.pid == USB_PID:
             return port.device
     return None
 
