@@ -19,7 +19,10 @@ The radio shows up on USB as `35F0:B001` (Bitcraze AB, Crazyradio 2.0 Thread), a
 ## Status
 
 Tested with two Crazyradio 2.0 and the OpenThread POSIX host (`ot-cli`): forming a network, joining it and pinging
-in both directions without lost or retried frames. Not yet tested with Home Assistant.
+in both directions without lost or retried frames.
+
+Tested with Home Assistant Container, an OpenThread Border Router container and the matter.js Matter server:
+Matter-over-Thread bulbs and a battery-powered button commissioned from the Home Assistant Android app.
 
 ## Building
 
@@ -65,6 +68,19 @@ With a debug probe connected, `just flash` flashes with probe-rs instead.
    matter for USB CDC ACM.
 3. Install the Matter Server add-on and the Matter integration, then commission Matter devices from the Home
    Assistant Companion app. The phone commissions over Bluetooth; the Crazyradio only carries the Thread traffic.
+
+When the border router runs on a Linux host you manage yourself, for example a Home Assistant Container install with
+the border router in its own container, the host must forward IPv6 between the local network and the Thread network.
+Without it, devices join the Thread network but commissioning stops at "connecting to device", because nothing on the
+local network can reach them. Enable forwarding and keep it across reboots:
+
+```
+printf 'net.ipv6.conf.all.forwarding = 1\nnet.ipv6.conf.eth0.accept_ra = 2\n' | sudo tee /etc/sysctl.d/99-thread-border-router.conf
+sudo sysctl --system
+```
+
+Replace `eth0` with the host's network interface. `accept_ra = 2` keeps the host accepting router advertisements on
+that interface with forwarding enabled.
 
 ## License
 
